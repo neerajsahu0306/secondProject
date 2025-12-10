@@ -16,13 +16,19 @@ public class Main {
         Transaction transaction = session.beginTransaction();
         Student obj = session.get(Student.class,scan.nextInt());
         if (obj != null) {
-            session.remove(obj);
-            System.out.println("student deleted successfully !");
+            System.out.println("Enter new name and new email");
+            String name = scan.next();
+            String email = scan.next();
+            obj.setName(name);
+            obj.setEmail(email);
+            session.persist(obj);
+            System.out.println("student updated successfully !");
         } else {
             System.out.println("student not found !");
         }
         transaction.commit();
         session.close();
         factory.close();
+        scan.close();
     }
 }
